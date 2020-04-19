@@ -22,7 +22,7 @@ pipeline {
    }
    
   post {
-    unstable {
+    always {
         junit '**/target/surefire-reports/TEST-*.xml'
         archiveArtifacts '**/target/*.jar'
         jacoco ()
