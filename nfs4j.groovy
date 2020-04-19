@@ -28,14 +28,8 @@ pipeline {
             junit '**/target/surefire-reports/TEST-*.xml'
             archiveArtifacts '**/target/*.jar'
             jacoco ()
-            recordIssues enabledForFailure: true, 
-                tools: [[tool: [$class: 'MavenConsole']], 
-                        [tool: [$class: 'Java']], 
-                        [tool: [$class: 'JavaDoc']]]
-            recordIssues enabledForFailure: true, tools: [[tool: [$class: 'CheckStyle']]]
-            recordIssues enabledForFailure: true, tools: [[tool: [$class: 'SpotBugs']]]
-            recordIssues enabledForFailure: true, tools: [[pattern: '**/target/cpd.xml', tool: [$class: 'Cpd']]]
-            recordIssues enabledForFailure: true, tools: [[pattern: '**/target/pmd.xml', tool: [$class: 'Pmd']]]
+            recordIssues tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
+            recordIssues tools: [checkStyle(), spotBugs(pattern: 'target/spotbugsXml.xml'), cpd(pattern: 'target/cpd.xml')]
         }
     }
    
