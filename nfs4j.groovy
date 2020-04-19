@@ -27,7 +27,7 @@ pipeline {
         archiveArtifacts '**/target/*.jar'
         jacoco ()
         recordIssues tools: [java(), javaDoc()], aggregatingResults: 'true', id: 'java', name: 'Java'
-        recordIssues tools: [checkStyle(), spotBugs(pattern: 'target/spotbugsXml.xml'), cpd(pattern: 'target/cpd.xml')]
+        recordIssues tools: [checkStyle(), spotBugs(pattern: '**/target/spotbugsXml.xml'), cpd(pattern: '**/target/cpd.xml')]
     }
   }
 }
